@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="card m-2 p-2">
           <div class="card-header">
-            <h3 class="card-title">All Eployee List</h3>
+            <h3 class="card-title">All Employee List</h3>
           </div>
           <div class="card-body">
             <table class="table table-bordered table-hover">
@@ -28,7 +28,7 @@
                   <td>
                     <router-link
                       class="btn btn-info btn-sm"
-                      :to="`/approve-employee/${employee.id}`"
+                      :to="`/edit-employee/${employee.id}`"
                       >Edit</router-link
                     >
                     <a

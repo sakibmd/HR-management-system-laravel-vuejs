@@ -2,6 +2,7 @@ import AdminHome from "./components/admin/AdminHome.vue"
 import PendingEmployee from "./components/admin/PendingEmployee.vue"
 import AllEmployees from "./components/admin/AllEmployees.vue"
 import RejectedEmployees from "./components/admin/RejectedEmployees.vue"
+import EditEmployees from "./components/admin/EditEmployees.vue"
 
 
 export const routes = [
@@ -20,5 +21,9 @@ export const routes = [
     {
         path:'/rejected-employees',
         component: RejectedEmployees
+    },
+    {
+        path:'/edit-employee/:id',
+        component: EditEmployees
     },
 ];

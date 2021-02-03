@@ -82,7 +82,7 @@
 
                             <div class="col-md-6">
                                 <textarea name="about" class="form-control @error('about') is-invalid @enderror"
-                                    name="about" value="{{ old('about') }}" required autocomplete="about" autofocus
+                                     name="about" value="{{ old('about') }}" required autocomplete="about" autofocus
                                     rows="3"></textarea>
 
 

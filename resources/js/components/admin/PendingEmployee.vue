@@ -7,7 +7,7 @@
             <h3 class="card-title">Pending Eployee List</h3>
           </div>
           <div class="card-body">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover" v-if="getAllPendingEmployees.length>0">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -45,6 +45,7 @@
                 </tr>
               </tbody>
             </table>
+             <h2 v-else class="bg-info text-white p-2 m-2 text-center">No Pending Employees Found</h2>
           </div>
         </div>
       </div>

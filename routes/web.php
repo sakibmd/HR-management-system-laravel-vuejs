@@ -30,6 +30,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         Route::get('/approve/{id}', 'DashboardController@approve');
         Route::get('/reject/{id}', 'DashboardController@reject');
         Route::get('/deleteRejectedEmployee/{id}', 'DashboardController@deleteRejectedEmployee');
+        Route::get('/editemployees/{id}', 'DashboardController@editemployee');
+        Route::post('/update-employee/{id}', 'DashboardController@updateemployee');
+        
     });
 
 //User
