@@ -93,8 +93,9 @@ class DashboardController extends Controller
 
         $now = Carbon::now();
         $now = $now->format('F Y');
+        $flag = 0;
 
-        $existingOrNot = Record::where('user_id', '=', $employee->id)->get();
+        $existingOrNot = Record::where('user_id', '=', $id)->get();
 
         if ($existingOrNot->count() == 0) {
             $record = new Record();
@@ -108,32 +109,37 @@ class DashboardController extends Controller
             $record->leave = $request->leave;
             $record->working_hour_per_day = $request->working_hour_per_day;
             $record->save();
-        } elseif ($existingOrNot->count() > 0) {
+        } else {
             foreach ($existingOrNot as $row) {
-                if (($row->where('month', '=', $now)->count()) > 0) {
-                    $lastMonthRecord = $row->where('month', $now)->orderBy('created_at', 'desc')->first();
-                    $existingMonth = Record::find($lastMonthRecord->id);
-                    $existingMonth->joining_date = $request->joining_date;
-                    $existingMonth->position = $request->position;
-                    $existingMonth->absents = $request->absents;
-                    $existingMonth->salaries = $request->salaries;
-                    $existingMonth->leave = $request->leave;
-                    $existingMonth->working_hour_per_day = $request->working_hour_per_day;
-                    $existingMonth->save();
-                } else {
-                    $record = new Record();
-                    $record->user_id = $employee->id;
-                    $record->user_name = $employee->name;
-                    $record->month = $now;
-                    $record->joining_date = $request->joining_date;
-                    $record->position = $request->position;
-                    $record->absents = $request->absents;
-                    $record->salaries = $request->salaries;
-                    $record->leave = $request->leave;
-                    $record->working_hour_per_day = $request->working_hour_per_day;
-                    $record->save();
+                if ($row->month == $now) {
+                    $flag = 1;
+                    break;
                 }
             }
+            if ($flag == 1) {
+                $lastMonthRecord = $row->where('month', $now)->orderBy('id', 'desc')->first();
+                $existingMonth = Record::find($lastMonthRecord->id);
+                $existingMonth->joining_date = $request->joining_date;
+                $existingMonth->position = $request->position;
+                $existingMonth->absents = $request->absents;
+                $existingMonth->salaries = $request->salaries;
+                $existingMonth->leave = $request->leave;
+                $existingMonth->working_hour_per_day = $request->working_hour_per_day;
+                $existingMonth->save();
+            } else {
+                $record = new Record();
+                $record->user_id = $employee->id;
+                $record->user_name = $employee->name;
+                $record->month = $now;
+                $record->joining_date = $request->joining_date;
+                $record->position = $request->position;
+                $record->absents = $request->absents;
+                $record->salaries = $request->salaries;
+                $record->leave = $request->leave;
+                $record->working_hour_per_day = $request->working_hour_per_day;
+                $record->save();
+            }
+
         }
 
     }
