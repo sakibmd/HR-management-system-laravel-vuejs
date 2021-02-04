@@ -1,46 +1,53 @@
-
 // for admin
 import AdminHome from "./components/admin/AdminHome.vue"
 import PendingEmployee from "./components/admin/PendingEmployee.vue"
 import AllEmployees from "./components/admin/AllEmployees.vue"
 import RejectedEmployees from "./components/admin/RejectedEmployees.vue"
 import EditEmployees from "./components/admin/EditEmployees.vue"
+import EmployeeDetails from "./components/admin/EmployeeDetails.vue"
+
+
 
 //for user
 import EditProfile from "./components/user/EditProfile.vue"
 import UserDetails from "./components/user/UserDetails.vue"
 
 
-export const routes = [
-    {
-        path:'/adminhome',
+export const routes = [{
+        path: '/adminhome',
         component: AdminHome
     },
     {
-        path:'/pending-employees',
+        path: '/pending-employees',
         component: PendingEmployee
     },
     {
-        path:'/all-employees',
+        path: '/all-employees',
         component: AllEmployees
     },
     {
-        path:'/rejected-employees',
+        path: '/rejected-employees',
         component: RejectedEmployees
     },
     {
-        path:'/edit-employee/:id',
+        path: '/edit-employee/:id',
         component: EditEmployees
     },
+
+    {
+        path: '/employee-details/:id',
+        component: EmployeeDetails
+    },
+
 
 
     //employee user
     {
-        path:'/user-details/',
+        path: '/user-details/',
         component: UserDetails
     },
     {
-        path:'/edit-profile/:id',
+        path: '/edit-profile/:id',
         component: EditProfile
     },
 ];

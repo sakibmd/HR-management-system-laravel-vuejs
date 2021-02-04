@@ -27,7 +27,9 @@
                   <td>{{ employee.dob }}</td>
                   <td>{{ employee.about }}</td>
                   <td>{{ employee.contact }}</td>
-                  <td>Image</td>
+                  <td>
+                    <img :src="showImage(employee.image)" width="50" height="50"   />
+                  </td>
                   <td>
                     <a
                       href=""
@@ -68,6 +70,9 @@ export default {
     },
   },
   methods: {
+    showImage(img) {
+      return "/uploadimage/" + img;
+    },
       approve(id) {
             axios.get("/admin/approve/" + id).then(() => {
                 this.$store.dispatch("getAllPendingEmployees");
@@ -86,6 +91,7 @@ export default {
                 });
             });
         },
+
   },
 };
 </script>

@@ -55,15 +55,28 @@ class DashboardController extends Controller
         User::find($id)->delete();
     }
 
+    public function detailsApprovedEmployee($id)
+    {
+        $approvedEmployee = Record::where('user_id', $id)->orderBy('id', 'desc')->first();
+        if ($approvedEmployee) {
+            return response()->json([
+                'approvedEmployee' => $approvedEmployee,
+            ], 200);
+        } else {
+            return response()->json([
+                'approvedEmployee' => null,
+            ], 200);
+        }
+
+    }
+
     public function editemployee($id)
     {
         $employee = Record::where('user_id', $id)->orderBy('id', 'desc')->first();
 
-     
-            return response()->json([
-                'employee' => $employee,
-            ], 200);
-     
+        return response()->json([
+            'employee' => $employee,
+        ], 200);
 
     }
 

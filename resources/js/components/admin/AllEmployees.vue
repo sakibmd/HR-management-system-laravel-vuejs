@@ -24,17 +24,22 @@
                   <td>{{ employee.dob }}</td>
                   <td>{{ employee.about }}</td>
                   <td>{{ employee.contact }}</td>
-                  <td>Image</td>
+                  <td> <img :src="showImage(employee.image)" width="50" height="50"   /></td>
                   <td>
+                     <router-link
+                      class="btn btn-success btn-sm m-1"
+                      :to="`/employee-details/${employee.id}`"
+                      >Details</router-link
+                    >
                     <router-link
-                      class="btn btn-info btn-sm"
+                      class="btn btn-info text-white btn-sm m-1"
                       :to="`/edit-employee/${employee.id}`"
                       >Edit</router-link
                     >
                     <a
                       href=""
                       @click.prevent="deleteCategory(category.id)"
-                      class="btn btn-danger btn-sm"
+                      class="btn btn-danger btn-sm m-1"
                       >Delete</a
                     >
                   </td>
@@ -62,7 +67,11 @@ export default {
       return this.$store.getters.getAllEmployees;
     },
   },
-  methods: {},
+  methods: {
+    showImage(img) {
+      return "/uploadimage/" + img;
+    },
+  },
 };
 </script>
 

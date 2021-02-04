@@ -5,7 +5,8 @@ export default {
         getAllEmployees: [],
         getAllPendingEmployees: [],
         getAllRejectedEmployees: [],
-        getUserProfileInfo: []
+        getUserProfileInfo: [],
+        getApprovedEmployeeDetails: []
     },
     getters: {
         getAllEmployees(state) {
@@ -20,6 +21,10 @@ export default {
         getUserProfileInfo(state) {
             return state.getUserProfileInfo
         },
+        getApprovedEmployeeDetails(state) {
+            return state.getApprovedEmployeeDetails
+        },
+
     },
     actions: {
         getAllEmployees(context) {
@@ -35,7 +40,7 @@ export default {
                     context.commit('allPendingEmployees', response.data.allPendingEmployees)
 
                 })
-        }, 
+        },
         getAllRejectedEmployees(context) {
             axios.get('/admin/all-rejected-employees')
                 .then((response) => {
@@ -51,6 +56,17 @@ export default {
 
                 })
         },
+
+     
+
+        getApprovedEmployeeDetails(context, payload) {
+            axios.get('/admin/approved-employee-details-info/' + payload)
+                .then((response) => {
+                    context.commit('getApprovedEmployeeDetails', response.data.approvedEmployee)
+                })
+        },
+
+
     },
     mutations: {
         allEmployees(state, date) {
@@ -64,6 +80,9 @@ export default {
         },
         getUserProfileInfo(state, date) {
             return state.getUserProfileInfo = date
+        },
+        getApprovedEmployeeDetails(state, date) {
+            return state.getApprovedEmployeeDetails = date
         },
     },
 

@@ -1,7 +1,8 @@
 <template>
   <div class="">
     <div class="row justify-content-center">
-      <h1 class="my-5">Welcome to Admin Panel</h1>
+      <h2 class="my-5">Welcome to Admin Panel</h2>
+     
     </div>
 
   </div>

@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+ Route::get('/home', 'HomeController@index')->name('home');
 
 //admin
 
@@ -31,7 +31,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         Route::get('/reject/{id}', 'DashboardController@reject');
         Route::get('/deleteRejectedEmployee/{id}', 'DashboardController@deleteRejectedEmployee');
         Route::get('/editemployees/{id}', 'DashboardController@editemployee');
+        Route::get('/approved-employee-details-info/{id}', 'DashboardController@detailsApprovedEmployee');
         Route::post('/update-employee/{id}', 'DashboardController@updateemployee');
+
+        
         
     });
 
@@ -42,7 +45,7 @@ Route::group(['as' => 'user.', 'prefix' => 'user', 'namespace' => 'User', 'middl
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::get('/user-details', 'DashboardController@userDetails');
         Route::get('/editProfileInfo/{id}', 'DashboardController@editProfileInfo');
-        Route::post('/update-profile/{id}', 'DashboardController@updateProfile');
+        Route::post('/updateProfile/{id}', 'DashboardController@updateProfile');
         
     });
 

@@ -116,7 +116,7 @@
                   :to="`/all-employees`"
                   >Back</router-link
                 >
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="submit" class="btn btn-primary btn-sm">Update</button>
             </div>
           </form>
         </div>

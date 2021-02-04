@@ -3,8 +3,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card p-2 m-2">
-            <h3 class="text-center my-2">Your Profile Information</h3>
+          <h3 class="text-center my-2">Your Profile Information</h3>
           <table class="table table-bordered">
+            <tr>
+              <div class="m-auto"><img :src="showImage(getUserProfileInfo.image)" width="200" height="200"   /></div>
+            </tr>
             <tr>
               <th>Name</th>
               <td>{{ getUserProfileInfo.name }}</td>
@@ -25,11 +28,11 @@
               <th>Date Of Birth</th>
               <td>{{ getUserProfileInfo.dob }}</td>
             </tr>
-             <router-link
-                      class="btn btn-success m-2 text-white"
-                      :to="`/edit-profile/${getUserProfileInfo.id}`"
-                      >Edit</router-link
-                    >
+            <router-link
+              class="btn btn-success m-2 text-white"
+              :to="`/edit-profile/${getUserProfileInfo.id}`"
+              >Edit</router-link
+            >
           </table>
         </div>
       </div>
@@ -49,6 +52,11 @@ export default {
   computed: {
     getUserProfileInfo() {
       return this.$store.getters.getUserProfileInfo;
+    },
+  },
+  methods: {
+    showImage(img) {
+      return "/uploadimage/" + img;
     },
   },
 };

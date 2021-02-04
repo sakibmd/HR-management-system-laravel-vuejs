@@ -8,7 +8,11 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form @submit.prevent="updateProfile()" enctype="multipart/form-data">
+          <form
+            @submit.prevent="updateProfile()"
+            role="form"
+            enctype="multipart/form-data"
+          >
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Name</label>
@@ -43,21 +47,6 @@
               </div>
 
               <div class="form-group">
-                <label for="dob">Date of birth</label>
-                <input
-                  type="date"
-                  id="dob"
-                  class="form-control"
-                  v-model="form.dob"
-                  name="dob"
-                  :class="{
-                    'is-invalid': form.errors.has('dob'),
-                  }"
-                />
-                <has-error :form="form" field="dob"></has-error>
-              </div>
-
-              <div class="form-group">
                 <label for="contact">Contact</label>
                 <input
                   type="text"
@@ -70,7 +59,22 @@
                     'is-invalid': form.errors.has('contact'),
                   }"
                 />
-                <has-error :form="form" field="absents"></has-error>
+                <has-error :form="form" field="contact"></has-error>
+              </div>
+
+              <div class="form-group">
+                <label for="dob">Date of birth</label>
+                <input
+                  type="date"
+                  id="dob"
+                  class="form-control"
+                  v-model="form.dob"
+                  name="dob"
+                  :class="{
+                    'is-invalid': form.errors.has('dob'),
+                  }"
+                />
+                <has-error :form="form" field="dob"></has-error>
               </div>
 
               <div class="form-group">
@@ -91,18 +95,22 @@
               </div>
 
               <div class="form-group">
-                  <label for="image">Image</label>
                 <input
+                  @change="changePhoto($event)"
                   name="image"
-                  id="image"
                   type="file"
                   :class="{
                     'is-invalid': form.errors.has('image'),
                   }"
                 />
 
+                <img
+                  :src="updateImage()"
+                  width="80"
+                  height="80"
+                />
+
                 <has-error :form="form" field="image"></has-error>
-                <!-- {{ form.image }} -->
               </div>
             </div>
             <!-- /.card-body -->
@@ -149,7 +157,7 @@ export default {
   methods: {
     updateProfile() {
       this.form
-        .post(`/user/update-profile/${this.$route.params.id}`)
+        .post(`/user/updateProfile/${this.$route.params.id}`)
         .then((response) => {
           this.$router.push("/user-details");
           Toast.fire({
@@ -157,6 +165,34 @@ export default {
             title: "Profile updated successfully",
           });
         });
+    },
+
+    changePhoto(event) {
+      let file = event.target.files[0];
+      if (file.size > 1048576) {
+        Swal.fire({
+          type: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: "<a href>Why do I have this issue?</a>",
+        });
+      } else {
+        let reader = new FileReader();
+        reader.onload = (event) => {
+          this.form.image = event.target.result;
+          console.log(event.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+
+    updateImage() {
+      let img = this.form.image;
+      if (img.length > 100) {
+        return this.form.image;
+      } else {
+        return `uploadimage/${this.form.image}`;
+      }
     },
   },
 };

@@ -1918,6 +1918,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -1981,6 +1982,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllEployees",
   data: function data() {
@@ -1994,7 +2000,11 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.getAllEmployees;
     }
   },
-  methods: {}
+  methods: {
+    showImage: function showImage(img) {
+      return "/uploadimage/" + img;
+    }
+  }
 });
 
 /***/ }),
@@ -2174,6 +2184,86 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/EmployeeDetails.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/EmployeeDetails.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "EmployeeDetails",
+  mounted: function mounted() {
+    this.$store.dispatch("getApprovedEmployeeDetails", this.$route.params.id);
+  },
+  computed: {
+    getApprovedEmployeeDetails: function getApprovedEmployeeDetails() {
+      return this.$store.getters.getApprovedEmployeeDetails;
+    }
+  },
+  methods: {
+    showImage: function showImage(img) {
+      return "/uploadimage/" + img;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/PendingEmployee.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/PendingEmployee.vue?vue&type=script&lang=js& ***!
@@ -2183,6 +2273,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2252,6 +2344,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    showImage: function showImage(img) {
+      return "/uploadimage/" + img;
+    },
     approve: function approve(id) {
       var _this = this;
 
@@ -2504,6 +2599,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditEmployees",
   mounted: function mounted() {
@@ -2530,7 +2633,7 @@ __webpack_require__.r(__webpack_exports__);
     updateProfile: function updateProfile() {
       var _this2 = this;
 
-      this.form.post("/user/update-profile/".concat(this.$route.params.id)).then(function (response) {
+      this.form.post("/user/updateProfile/".concat(this.$route.params.id)).then(function (response) {
         _this2.$router.push("/user-details");
 
         Toast.fire({
@@ -2538,6 +2641,38 @@ __webpack_require__.r(__webpack_exports__);
           title: "Profile updated successfully"
         });
       });
+    },
+    changePhoto: function changePhoto(event) {
+      var _this3 = this;
+
+      var file = event.target.files[0];
+
+      if (file.size > 1048576) {
+        Swal.fire({
+          type: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: "<a href>Why do I have this issue?</a>"
+        });
+      } else {
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          _this3.form.image = event.target.result;
+          console.log(event.target.result);
+        };
+
+        reader.readAsDataURL(file);
+      }
+    },
+    updateImage: function updateImage() {
+      var img = this.form.image;
+
+      if (img.length > 100) {
+        return this.form.image;
+      } else {
+        return "uploadimage/".concat(this.form.image);
+      }
     }
   }
 });
@@ -2595,6 +2730,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserDetails",
   mounted: function mounted() {
@@ -2603,6 +2741,11 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     getUserProfileInfo: function getUserProfileInfo() {
       return this.$store.getters.getUserProfileInfo;
+    }
+  },
+  methods: {
+    showImage: function showImage(img) {
+      return "/uploadimage/" + img;
     }
   }
 });
@@ -42893,7 +43036,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", {}, [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _c("h1", { staticClass: "my-5" }, [_vm._v("Welcome to Admin Panel")])
+        _c("h2", { staticClass: "my-5" }, [_vm._v("Welcome to Admin Panel")])
       ])
     ])
   }
@@ -42965,7 +43108,15 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(employee.contact))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Image")]),
+                    _c("td", [
+                      _c("img", {
+                        attrs: {
+                          src: _vm.showImage(employee.image),
+                          width: "50",
+                          height: "50"
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -42973,7 +43124,16 @@ var render = function() {
                         _c(
                           "router-link",
                           {
-                            staticClass: "btn btn-info btn-sm",
+                            staticClass: "btn btn-success btn-sm m-1",
+                            attrs: { to: "/employee-details/" + employee.id }
+                          },
+                          [_vm._v("Details")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-info text-white btn-sm m-1",
                             attrs: { to: "/edit-employee/" + employee.id }
                           },
                           [_vm._v("Edit")]
@@ -42982,7 +43142,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            staticClass: "btn btn-danger btn-sm",
+                            staticClass: "btn btn-danger btn-sm m-1",
                             attrs: { href: "" },
                             on: {
                               click: function($event) {
@@ -43370,7 +43530,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-primary",
+                      staticClass: "btn btn-primary btn-sm",
                       attrs: { type: "submit" }
                     },
                     [_vm._v("Update")]
@@ -43395,6 +43555,112 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/EmployeeDetails.vue?vue&type=template&id=8c279cce&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/EmployeeDetails.vue?vue&type=template&id=8c279cce& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card p-2 m-2" }, [
+          _c("h4", { staticClass: "text-center my-2" }, [
+            _vm._v("Employee Details")
+          ]),
+          _vm._v(" "),
+          _vm.getApprovedEmployeeDetails == null
+            ? _c(
+                "h4",
+                { staticClass: "bg-info text-white text-center p-2 m-2" },
+                [
+                  _vm._v(
+                    "\n          No details found! Please add his/her details\n        "
+                  )
+                ]
+              )
+            : _c("table", { staticClass: "table table-bordered" }, [
+                _c("tr", [
+                  _c("th", [_vm._v("Name")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.getApprovedEmployeeDetails.user_name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [_vm._v("Joining Date")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.getApprovedEmployeeDetails.joining_date))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [_vm._v("Position")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.getApprovedEmployeeDetails.position))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [_vm._v("Absents")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.getApprovedEmployeeDetails.absents))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [_vm._v("Salaries")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.getApprovedEmployeeDetails.salaries))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [_vm._v("Working Hour Per Day")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.getApprovedEmployeeDetails.working_hour_per_day
+                      )
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [_vm._v("Leave")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.getApprovedEmployeeDetails.leave))
+                  ])
+                ])
+              ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43445,7 +43711,15 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(employee.contact))]),
                           _vm._v(" "),
-                          _c("td", [_vm._v("Image")]),
+                          _c("td", [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.showImage(employee.image),
+                                width: "50",
+                                height: "50"
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c("td", [
                             _c(
@@ -43672,7 +43946,7 @@ var render = function() {
           _c(
             "form",
             {
-              attrs: { enctype: "multipart/form-data" },
+              attrs: { role: "form", enctype: "multipart/form-data" },
               on: {
                 submit: function($event) {
                   $event.preventDefault()
@@ -43772,44 +44046,6 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _c("label", { attrs: { for: "dob" } }, [
-                      _vm._v("Date of birth")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.dob,
-                          expression: "form.dob"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        "is-invalid": _vm.form.errors.has("dob")
-                      },
-                      attrs: { type: "date", id: "dob", name: "dob" },
-                      domProps: { value: _vm.form.dob },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "dob", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("has-error", { attrs: { form: _vm.form, field: "dob" } })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
                     _c("label", { attrs: { for: "contact" } }, [
                       _vm._v("Contact")
                     ]),
@@ -43845,8 +44081,46 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("has-error", {
-                      attrs: { form: _vm.form, field: "absents" }
+                      attrs: { form: _vm.form, field: "contact" }
                     })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { attrs: { for: "dob" } }, [
+                      _vm._v("Date of birth")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.dob,
+                          expression: "form.dob"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.form.errors.has("dob")
+                      },
+                      attrs: { type: "date", id: "dob", name: "dob" },
+                      domProps: { value: _vm.form.dob },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "dob", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", { attrs: { form: _vm.form, field: "dob" } })
                   ],
                   1
                 ),
@@ -43898,13 +44172,24 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _c("label", { attrs: { for: "image" } }, [_vm._v("Image")]),
-                    _vm._v(" "),
                     _c("input", {
                       class: {
                         "is-invalid": _vm.form.errors.has("image")
                       },
-                      attrs: { name: "image", id: "image", type: "file" }
+                      attrs: { name: "image", type: "file" },
+                      on: {
+                        change: function($event) {
+                          return _vm.changePhoto($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("img", {
+                      attrs: {
+                        src: _vm.updateImage(),
+                        width: "80",
+                        height: "80"
+                      }
                     }),
                     _vm._v(" "),
                     _c("has-error", {
@@ -43989,6 +44274,18 @@ var render = function() {
             "table",
             { staticClass: "table table-bordered" },
             [
+              _c("tr", [
+                _c("div", { staticClass: "m-auto" }, [
+                  _c("img", {
+                    attrs: {
+                      src: _vm.showImage(_vm.getUserProfileInfo.image),
+                      width: "200",
+                      height: "200"
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
               _c("tr", [
                 _c("th", [_vm._v("Name")]),
                 _vm._v(" "),
@@ -61036,6 +61333,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/EmployeeDetails.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/admin/EmployeeDetails.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EmployeeDetails_vue_vue_type_template_id_8c279cce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EmployeeDetails.vue?vue&type=template&id=8c279cce& */ "./resources/js/components/admin/EmployeeDetails.vue?vue&type=template&id=8c279cce&");
+/* harmony import */ var _EmployeeDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EmployeeDetails.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/EmployeeDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EmployeeDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EmployeeDetails_vue_vue_type_template_id_8c279cce___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EmployeeDetails_vue_vue_type_template_id_8c279cce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/EmployeeDetails.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/EmployeeDetails.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/admin/EmployeeDetails.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./EmployeeDetails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/EmployeeDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/EmployeeDetails.vue?vue&type=template&id=8c279cce&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/admin/EmployeeDetails.vue?vue&type=template&id=8c279cce& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeDetails_vue_vue_type_template_id_8c279cce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./EmployeeDetails.vue?vue&type=template&id=8c279cce& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/EmployeeDetails.vue?vue&type=template&id=8c279cce&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeDetails_vue_vue_type_template_id_8c279cce___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeeDetails_vue_vue_type_template_id_8c279cce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/PendingEmployee.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/admin/PendingEmployee.vue ***!
@@ -61380,9 +61746,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_AllEmployees_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/admin/AllEmployees.vue */ "./resources/js/components/admin/AllEmployees.vue");
 /* harmony import */ var _components_admin_RejectedEmployees_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/admin/RejectedEmployees.vue */ "./resources/js/components/admin/RejectedEmployees.vue");
 /* harmony import */ var _components_admin_EditEmployees_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/admin/EditEmployees.vue */ "./resources/js/components/admin/EditEmployees.vue");
-/* harmony import */ var _components_user_EditProfile_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/user/EditProfile.vue */ "./resources/js/components/user/EditProfile.vue");
-/* harmony import */ var _components_user_UserDetails_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/user/UserDetails.vue */ "./resources/js/components/user/UserDetails.vue");
+/* harmony import */ var _components_admin_EmployeeDetails_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/admin/EmployeeDetails.vue */ "./resources/js/components/admin/EmployeeDetails.vue");
+/* harmony import */ var _components_user_EditProfile_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/user/EditProfile.vue */ "./resources/js/components/user/EditProfile.vue");
+/* harmony import */ var _components_user_UserDetails_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/user/UserDetails.vue */ "./resources/js/components/user/UserDetails.vue");
 // for admin
+
 
 
 
@@ -61406,13 +61774,16 @@ var routes = [{
 }, {
   path: '/edit-employee/:id',
   component: _components_admin_EditEmployees_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+}, {
+  path: '/employee-details/:id',
+  component: _components_admin_EmployeeDetails_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, //employee user
 {
   path: '/user-details/',
-  component: _components_user_UserDetails_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+  component: _components_user_UserDetails_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
   path: '/edit-profile/:id',
-  component: _components_user_EditProfile_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _components_user_EditProfile_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 }];
 
 /***/ }),
@@ -61434,7 +61805,8 @@ __webpack_require__.r(__webpack_exports__);
     getAllEmployees: [],
     getAllPendingEmployees: [],
     getAllRejectedEmployees: [],
-    getUserProfileInfo: []
+    getUserProfileInfo: [],
+    getApprovedEmployeeDetails: []
   },
   getters: {
     getAllEmployees: function getAllEmployees(state) {
@@ -61448,6 +61820,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     getUserProfileInfo: function getUserProfileInfo(state) {
       return state.getUserProfileInfo;
+    },
+    getApprovedEmployeeDetails: function getApprovedEmployeeDetails(state) {
+      return state.getApprovedEmployeeDetails;
     }
   },
   actions: {
@@ -61470,6 +61845,11 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/user/user-details').then(function (response) {
         context.commit('getUserProfileInfo', response.data.userdetails);
       });
+    },
+    getApprovedEmployeeDetails: function getApprovedEmployeeDetails(context, payload) {
+      axios.get('/admin/approved-employee-details-info/' + payload).then(function (response) {
+        context.commit('getApprovedEmployeeDetails', response.data.approvedEmployee);
+      });
     }
   },
   mutations: {
@@ -61484,6 +61864,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     getUserProfileInfo: function getUserProfileInfo(state, date) {
       return state.getUserProfileInfo = date;
+    },
+    getApprovedEmployeeDetails: function getApprovedEmployeeDetails(state, date) {
+      return state.getApprovedEmployeeDetails = date;
     }
   }
 });
