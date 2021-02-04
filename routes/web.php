@@ -40,5 +40,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 Route::group(['as' => 'user.', 'prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth', 'user']],
     function () {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('/user-details', 'DashboardController@userDetails');
+        Route::get('/editProfileInfo/{id}', 'DashboardController@editProfileInfo');
+        Route::post('/update-profile/{id}', 'DashboardController@updateProfile');
+        
     });
 

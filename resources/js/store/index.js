@@ -4,7 +4,8 @@ export default {
     state: {
         getAllEmployees: [],
         getAllPendingEmployees: [],
-        getAllRejectedEmployees: []
+        getAllRejectedEmployees: [],
+        getUserProfileInfo: []
     },
     getters: {
         getAllEmployees(state) {
@@ -15,6 +16,9 @@ export default {
         },
         getAllRejectedEmployees(state) {
             return state.getAllRejectedEmployees
+        },
+        getUserProfileInfo(state) {
+            return state.getUserProfileInfo
         },
     },
     actions: {
@@ -39,6 +43,14 @@ export default {
 
                 })
         },
+
+        getUserProfileInfo(context) {
+            axios.get('/user/user-details')
+                .then((response) => {
+                    context.commit('getUserProfileInfo', response.data.userdetails)
+
+                })
+        },
     },
     mutations: {
         allEmployees(state, date) {
@@ -49,6 +61,9 @@ export default {
         },
         getAllRejectedEmployees(state, date) {
             return state.getAllRejectedEmployees = date
+        },
+        getUserProfileInfo(state, date) {
+            return state.getUserProfileInfo = date
         },
     },
 

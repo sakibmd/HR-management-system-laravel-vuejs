@@ -111,6 +111,11 @@
             <!-- /.card-body -->
 
             <div class="card-footer">
+               <router-link
+                  class="btn btn-danger btn-sm m-1"
+                  :to="`/all-employees`"
+                  >Back</router-link
+                >
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </form>

@@ -29,6 +29,7 @@ import {
 
 
 Vue.component('admin-main', require('./components/admin/AdminMaster.vue').default);
+Vue.component('user-main', require('./components/user/UserMaster.vue').default);
 
 //form
 import {Form,HasError,AlertError} from 'vform'
