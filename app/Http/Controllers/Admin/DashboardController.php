@@ -99,6 +99,10 @@ class DashboardController extends Controller
 
         if ($existingOrNot->count() == 0) {
             $record = new Record();
+
+            $employee->position = $request->position;
+            $employee->save();
+
             $record->user_id = $employee->id;
             $record->user_name = $employee->name;
             $record->month = $now;
@@ -109,6 +113,7 @@ class DashboardController extends Controller
             $record->leave = $request->leave;
             $record->working_hour_per_day = $request->working_hour_per_day;
             $record->save();
+
         } else {
             foreach ($existingOrNot as $row) {
                 if ($row->month == $now) {
@@ -119,6 +124,10 @@ class DashboardController extends Controller
             if ($flag == 1) {
                 $lastMonthRecord = $row->where('month', $now)->orderBy('id', 'desc')->first();
                 $existingMonth = Record::find($lastMonthRecord->id);
+
+                $employee->position = $request->position;
+                $employee->save();
+
                 $existingMonth->joining_date = $request->joining_date;
                 $existingMonth->position = $request->position;
                 $existingMonth->absents = $request->absents;
@@ -128,6 +137,10 @@ class DashboardController extends Controller
                 $existingMonth->save();
             } else {
                 $record = new Record();
+
+                $employee->position = $request->position;
+                $employee->save();
+
                 $record->user_id = $employee->id;
                 $record->user_name = $employee->name;
                 $record->month = $now;
@@ -144,4 +157,27 @@ class DashboardController extends Controller
 
     }
 
+    public function ourTeam()
+    {
+        $getOurTeam = User::where('isapproved', 'approved')->where('role_id', 2)->get();
+        return response()->json([
+            'getOurTeam' => $getOurTeam,
+        ], 200);
+    }
+
+    public function getTopFiveEmployees()
+    {
+        $now = Carbon::now();
+        $now = $now->format('F Y');
+
+        $getTopFive = Record::orderBy('leave', 'asc')
+            ->orderBy('working_hour_per_day', 'desc')
+            ->orderBy('absents', 'asc')
+            ->where('month', $now)
+            ->take(5)->get();
+
+        return response()->json([
+            'getTopFive' => $getTopFive,
+        ], 200);
+    }
 }

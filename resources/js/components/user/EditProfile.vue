@@ -104,11 +104,7 @@
                   }"
                 />
 
-                <img
-                  :src="updateImage()"
-                  width="80"
-                  height="80"
-                />
+               
 
                 <has-error :form="form" field="image"></has-error>
               </div>
@@ -186,14 +182,7 @@ export default {
       }
     },
 
-    updateImage() {
-      let img = this.form.image;
-      if (img.length > 100) {
-        return this.form.image;
-      } else {
-        return `uploadimage/${this.form.image}`;
-      }
-    },
+    
   },
 };
 </script>

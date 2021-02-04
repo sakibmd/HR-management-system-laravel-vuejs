@@ -6,7 +6,9 @@ export default {
         getAllPendingEmployees: [],
         getAllRejectedEmployees: [],
         getUserProfileInfo: [],
-        getApprovedEmployeeDetails: []
+        getApprovedEmployeeDetails: [],
+        getOurTeam: [],
+        getTopFiveEmployees: []
     },
     getters: {
         getAllEmployees(state) {
@@ -23,6 +25,12 @@ export default {
         },
         getApprovedEmployeeDetails(state) {
             return state.getApprovedEmployeeDetails
+        },
+        getOurTeam(state) {
+            return state.getOurTeam;
+        },
+        getTopFiveEmployees(state) {
+            return state.getTopFiveEmployees;
         },
 
     },
@@ -66,24 +74,48 @@ export default {
                 })
         },
 
+        getOurTeam(context) {
+            axios.get('/admin/our-team/')
+                .then((response) => {
+                    context.commit('getOurTeam', response.data.getOurTeam)
+                })
+        },
+
+        getTopFiveEmployees(context) {
+            axios.get('/admin/top-five-employees/')
+                .then((response) => {
+                    context.commit('getTopFiveEmployees', response.data.getTopFive)
+                })
+        },
+
 
     },
     mutations: {
-        allEmployees(state, date) {
-            return state.getAllEmployees = date
+        allEmployees(state, data) {
+            return state.getAllEmployees = data
         },
-        allPendingEmployees(state, date) {
-            return state.getAllPendingEmployees = date
+        allPendingEmployees(state, data) {
+            return state.getAllPendingEmployees = data
         },
-        getAllRejectedEmployees(state, date) {
-            return state.getAllRejectedEmployees = date
+        getAllRejectedEmployees(state, data) {
+            return state.getAllRejectedEmployees = data
         },
-        getUserProfileInfo(state, date) {
-            return state.getUserProfileInfo = date
+        getUserProfileInfo(state, data) {
+            return state.getUserProfileInfo = data
         },
-        getApprovedEmployeeDetails(state, date) {
-            return state.getApprovedEmployeeDetails = date
+        getApprovedEmployeeDetails(state, data) {
+            return state.getApprovedEmployeeDetails = data
         },
+
+        getOurTeam(state, data) {
+            return state.getOurTeam = data
+        },
+
+        getTopFiveEmployees(state, data) {
+            return state.getTopFiveEmployees = data
+        },
+
+        
     },
 
 }

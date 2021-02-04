@@ -40,6 +40,13 @@
               <th>Leave</th>
               <td>{{ getApprovedEmployeeDetails.leave }}</td>
             </tr>
+            <tr>
+                 <router-link
+                  class="btn btn-danger btn-sm m-1"
+                  :to="`/all-employees`"
+                  >Back</router-link
+                >
+            </tr>
           </table>
         </div>
       </div>

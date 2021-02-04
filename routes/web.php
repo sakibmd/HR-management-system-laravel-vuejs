@@ -34,6 +34,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         Route::get('/approved-employee-details-info/{id}', 'DashboardController@detailsApprovedEmployee');
         Route::post('/update-employee/{id}', 'DashboardController@updateemployee');
 
+        Route::get('/our-team', 'DashboardController@ourTeam');
+        Route::get('/top-five-employees', 'DashboardController@getTopFiveEmployees');
+
         
         
     });

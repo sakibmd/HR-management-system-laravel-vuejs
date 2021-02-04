@@ -27,7 +27,17 @@
                         Rejected Employees
                     </router-link>
                 </li>
-                <li class="list-group-item">Service</li>
+                <li class="list-group-item">
+                    <router-link to="/our-team" class="nav-link">
+                        Our Team
+                    </router-link>
+                </li>
+
+                <li class="list-group-item">
+                    <router-link to="/top-five-employees" class="nav-link">
+                        Top 5 Employees
+                    </router-link>
+                </li>
             </ul>
         </div>
         <div class="col-md-9">

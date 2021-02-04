@@ -7,7 +7,10 @@
             <h3 class="card-title">Pending Eployee List</h3>
           </div>
           <div class="card-body">
-            <table class="table table-bordered table-hover" v-if="getAllPendingEmployees.length>0">
+            <table
+              class="table table-bordered table-hover"
+              v-if="getAllPendingEmployees.length > 0"
+            >
               <thead>
                 <tr>
                   <th>Name</th>
@@ -28,26 +31,32 @@
                   <td>{{ employee.about }}</td>
                   <td>{{ employee.contact }}</td>
                   <td>
-                    <img :src="showImage(employee.image)" width="50" height="50"   />
+                    <img
+                      :src="showImage(employee.image)"
+                      width="50"
+                      height="50"
+                    />
                   </td>
                   <td>
                     <a
                       href=""
                       @click.prevent="approve(employee.id)"
-                      class="btn btn-success btn-sm"
+                      class="btn btn-success btn-sm m-1"
                       >Approve</a
                     >
                     <a
                       href=""
                       @click.prevent="reject(employee.id)"
-                      class="btn btn-danger btn-sm"
+                      class="btn btn-danger btn-sm m-1"
                       >Reject</a
                     >
                   </td>
                 </tr>
               </tbody>
             </table>
-             <h2 v-else class="bg-info text-white p-2 m-2 text-center">No Pending Employees Found</h2>
+            <h2 v-else class="bg-info text-white p-2 m-2 text-center">
+              No Pending Employees Found
+            </h2>
           </div>
         </div>
       </div>
@@ -73,25 +82,24 @@ export default {
     showImage(img) {
       return "/uploadimage/" + img;
     },
-      approve(id) {
-            axios.get("/admin/approve/" + id).then(() => {
-                this.$store.dispatch("getAllPendingEmployees");
-                Toast.fire({
-                    icon: "success",
-                    title: "Employee Request Approved Successfully"
-                });
-            });
-        },
-        reject(id) {
-            axios.get("/admin/reject/" + id).then(() => {
-                this.$store.dispatch("getAllPendingEmployees");
-                Toast.fire({
-                    icon: "success",
-                    title: "Employee Request Reject Successfully"
-                });
-            });
-        },
-
+    approve(id) {
+      axios.get("/admin/approve/" + id).then(() => {
+        this.$store.dispatch("getAllPendingEmployees");
+        Toast.fire({
+          icon: "success",
+          title: "Employee Request Approved Successfully",
+        });
+      });
+    },
+    reject(id) {
+      axios.get("/admin/reject/" + id).then(() => {
+        this.$store.dispatch("getAllPendingEmployees");
+        Toast.fire({
+          icon: "success",
+          title: "Employee Request Reject Successfully",
+        });
+      });
+    },
   },
 };
 </script>
