@@ -94,6 +94,7 @@ class DashboardController extends Controller
         $now = Carbon::now();
         $now = $now->format('F Y');
         $flag = 0;
+        $lastMonthRecord = '';
 
         $existingOrNot = Record::where('user_id', '=', $id)->get();
 
@@ -118,11 +119,11 @@ class DashboardController extends Controller
             foreach ($existingOrNot as $row) {
                 if ($row->month == $now) {
                     $flag = 1;
-                    break;
+                    $lastMonthRecord = $row;
                 }
             }
             if ($flag == 1) {
-                $lastMonthRecord = $row->where('month', $now)->orderBy('id', 'desc')->first();
+                //$lastMonthRecord = $existingOrNot->where('month', $now)->orderBy('id', 'desc')->first();
                 $existingMonth = Record::find($lastMonthRecord->id);
 
                 $employee->position = $request->position;
@@ -170,9 +171,9 @@ class DashboardController extends Controller
         $now = Carbon::now();
         $now = $now->format('F Y');
 
-        $getTopFive = Record::orderBy('leave', 'asc')
-            ->orderBy('working_hour_per_day', 'desc')
+        $getTopFive = Record::orderBy('working_hour_per_day', 'desc')
             ->orderBy('absents', 'asc')
+            ->orderBy('leave', 'asc')
             ->where('month', $now)
             ->take(5)->get();
 

@@ -19,6 +19,10 @@ Auth::routes();
 
  Route::get('/home', 'HomeController@index')->name('home');
 
+
+ Route::get('/topFiveEmployees', 'HomeController@topFiveEmployee')->name('topFive');
+ Route::get('/ourTeam', 'HomeController@ourTeam')->name('ourTeam');
+
 //admin
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']],
