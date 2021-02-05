@@ -44767,7 +44767,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Pending Eployee List")])
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Reject Employee List")])
     ])
   },
   function() {
@@ -44827,11 +44827,11 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(employee.salaries))]),
               _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(employee.working_hour_per_day))]),
+              _vm._v(" "),
               _c("td", [_vm._v(_vm._s(employee.leave))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(employee.absents))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(employee.working_hour_per_day))])
+              _c("td", [_vm._v(_vm._s(employee.absents))])
             ])
           }),
           0
@@ -44851,11 +44851,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Salary")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Working Hour Per Day")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Leave")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Absents")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Working Hour Per Day")])
+        _c("th", [_vm._v("Absents")])
       ])
     ])
   }

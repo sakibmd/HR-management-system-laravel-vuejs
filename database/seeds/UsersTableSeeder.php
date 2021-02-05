@@ -95,12 +95,57 @@ class UsersTableSeeder extends Seeder
           'contact' => '0166651617',
           'dob' => '1998-10-06',
           'image' => '5.jpeg',
-          'isapproved' => 'pending',
+          'isapproved' => 'approved',
           'created_at' => '2021-02-03 13:20:14',
           'updated_at' => '2021-02-03 13:20:14',
           'password' => bcrypt('11223344'),
           'position' => 'Android Developer',
       ]);
+
+      DB::table('users')->insert([
+        'role_id' => '2',
+        'name' => 'Jannath Syeda',
+        'email' => 'jannath@gmail.com',
+        'about' => 'Hi i am Jannath',
+        'contact' => '01662523262',
+        'dob' => '1996-06-06',
+        'image' => '6.jpeg',
+        'isapproved' => 'approved',
+        'created_at' => '2021-02-03 13:20:14',
+        'updated_at' => '2021-02-03 13:20:14',
+        'password' => bcrypt('11223344'),
+        'position' => 'Laravel Developer',
+    ]);
+
+    DB::table('users')->insert([
+        'role_id' => '2',
+        'name' => 'Fahim Kawsar',
+        'email' => 'fahim@gmail.com',
+        'about' => 'Hi i am Fahim',
+        'contact' => '01633323262',
+        'dob' => '1995-06-25',
+        'image' => '7.jpeg',
+        'isapproved' => 'pending',
+        'created_at' => '2021-02-03 13:20:14',
+        'updated_at' => '2021-02-03 13:20:14',
+        'password' => bcrypt('11223344'),
+        'position' => 'Vue.js Developer',
+    ]);
+
+    DB::table('users')->insert([
+        'role_id' => '2',
+        'name' => 'Bappa Khan',
+        'email' => 'bappa@gmail.com',
+        'about' => 'Hi i am Bappa',
+        'contact' => '01454523262',
+        'dob' => '1998-12-25',
+        'image' => '8.jpeg',
+        'isapproved' => 'pending',
+        'created_at' => '2021-02-03 13:20:14',
+        'updated_at' => '2021-02-03 13:20:14',
+        'password' => bcrypt('11223344'),
+        'position' => 'Wordpress Developer',
+    ]);
 
     }
 }

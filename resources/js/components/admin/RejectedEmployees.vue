@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="card m-2 p-2">
           <div class="card-header">
-            <h3 class="card-title">Pending Eployee List</h3>
+            <h3 class="card-title">Reject Employee List</h3>
           </div>
           <div class="card-body">
             <table class="table table-bordered table-hover" v-if="getAllRejectedEmployees.length>0">

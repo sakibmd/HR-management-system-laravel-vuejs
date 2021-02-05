@@ -172,8 +172,8 @@ class DashboardController extends Controller
         $now = $now->format('F Y');
 
         $getTopFive = Record::orderBy('working_hour_per_day', 'desc')
-            ->orderBy('absents', 'asc')
             ->orderBy('leave', 'asc')
+            ->orderBy('absents', 'asc')
             ->where('month', $now)
             ->take(5)->get();
 

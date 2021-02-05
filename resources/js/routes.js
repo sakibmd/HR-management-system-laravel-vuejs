@@ -10,11 +10,6 @@ import EmployeeDetails from "./components/admin/EmployeeDetails.vue"
 
 
 
-
-
-
-
-
 //for user
 import EditProfile from "./components/user/EditProfile.vue"
 import UserDetails from "./components/user/UserDetails.vue"

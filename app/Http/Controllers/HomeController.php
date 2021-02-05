@@ -33,8 +33,8 @@ class HomeController extends Controller
         $now = Carbon::now();
         $now = $now->format('F Y');
 
-        $getTopFive = Record::orderBy('leave', 'asc')
-            ->orderBy('working_hour_per_day', 'desc')
+        $getTopFive = Record::orderBy('working_hour_per_day', 'desc')
+            ->orderBy('leave', 'asc')
             ->orderBy('absents', 'asc')
             ->where('month', $now)
             ->take(5)->get();
