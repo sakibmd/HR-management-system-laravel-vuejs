@@ -5,6 +5,8 @@
 
 <h3>In this project I have used vue.js in only the management segment (backend). </h3>
 
+## Keywords: #vuejs #vue-router #vuex #php #laravel #mysql
+
 
 <ul>
 <h2>For Admin:</h2>
